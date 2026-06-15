@@ -10,6 +10,7 @@ Personal reference guides for Windows developer setup, system maintenance, repai
 | :----------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------- |
 | [windows-dev-setup.md](setup/windows-dev-setup.md)     | Bootstrap a complete developer toolchain on a fresh Windows install (Git, VS Code, WSL 2, Docker, Python, Node.js, JDK, TypeScript) |
 | [windows-extra-tools.md](setup/windows-extra-tools.md) | Supplementary CLI and media tools (yt-dlp, FFmpeg, 7-Zip, VLC, ExifTool)                                                            |
+| [office-2024-setup.md](setup/office-2024-setup.md)     | Install Office 2024 legally using the Office Deployment Tool and Office Customization Tool                                          |
 
 ## Maintenance
 
