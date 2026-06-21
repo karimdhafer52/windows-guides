@@ -1,7 +1,8 @@
 # Windows System Maintenance Guide
 
-A complete reference for keeping a Windows 10/11 system lean, fast, and secure. Covers
-service tuning, startup cleanup, storage purging, and monthly maintenance routines.
+A complete reference for keeping a Windows 10/11 system lean, fast, private, and secure.
+Covers service tuning, startup cleanup, Delivery Optimization, notification/ad cleanup,
+optional features, storage purging, and monthly maintenance routines.
 
 > **Prerequisites:** Windows 10/11, PowerShell or Command Prompt running as Administrator.
 
@@ -13,9 +14,12 @@ service tuning, startup cleanup, storage purging, and monthly maintenance routin
 2. [Core Services Optimization](#2-core-services-optimization)
 3. [Visual Performance Tweaks](#3-visual-performance-tweaks)
 4. [Startup Apps Optimization](#4-startup-apps-optimization)
-5. [Deep Storage Cleanup & Temp File Removal](#5-deep-storage-cleanup--temp-file-removal)
-6. [Network Routing Refresh](#6-network-routing-refresh)
-7. [Monthly Security Baseline](#7-monthly-security-baseline)
+5. [Delivery Optimization](#5-delivery-optimization)
+6. [Notifications & Suggestion Cleanup](#6-notifications--suggestion-cleanup)
+7. [Windows Optional Features](#7-windows-optional-features)
+8. [Deep Storage Cleanup & Temp File Removal](#8-deep-storage-cleanup--temp-file-removal)
+9. [Network Routing Refresh](#9-network-routing-refresh)
+10. [Monthly Security Baseline](#10-monthly-security-baseline)
 
 ---
 
@@ -170,7 +174,80 @@ These are hardware-dependent and disabling them can break system functionality.
 
 ---
 
-## 5. Deep Storage Cleanup & Temp File Removal
+## 5. Delivery Optimization
+
+By default, Windows Update can upload portions of downloaded updates to other devices on
+the internet — including devices outside your local network — to help distribute updates
+peer-to-peer. On a capped or metered connection, this silently consumes upload bandwidth.
+
+### Benefits of Disabling It
+
+- **Conserves data** — stops your PC from uploading Windows updates to other devices,
+  critical on a capped or metered connection.
+- **Improves network performance** — frees up upload bandwidth and stops your CPU/RAM from
+  being used as a temporary distribution server.
+- **No impact on updates** — your computer still downloads and installs all updates
+  directly and securely from Microsoft's servers.
+
+### How to Turn It Off
+
+1. Open **Settings** (`Windows Key + I`).
+2. Go to **Windows Update** → **Advanced options**.
+3. Scroll down and select **Delivery Optimization**.
+4. Toggle **Allow downloads from other devices** to **Off**.
+
+### When to Leave It On
+
+- **Multi-PC households** — set it to "PCs on my local network" so your machines share
+  already-downloaded updates with each other instead of each one re-downloading the same
+  files from Microsoft.
+- **Offices and enterprises** — larger networks use this to relieve their main server by
+  distributing updates peer-to-peer locally.
+
+---
+
+## 6. Notifications & Suggestion Cleanup
+
+Windows ships with two notification settings enabled by default that are not security or
+update-related — they're used to surface product suggestions and tips, often disguised as
+helpful configuration advice.
+
+### Why You Should Uncheck Them
+
+- **Blocks advertisements** — Microsoft uses these settings to suggest OneDrive, Microsoft
+  365, or Copilot, often framed as helpful tips.
+- **Reduces distractions** — stops unexpected full-screen pop-ups after a restart or update.
+- **Improves privacy** — reduces the usage data Windows collects to tailor these suggestions.
+- **No functional loss** — disabling them never blocks critical system alerts, security
+  notifications, or actual Windows updates.
+
+### How to Confirm They Are Off
+
+1. Open **Settings** (`Windows Key + I`).
+2. Go to **System → Notifications**.
+3. Scroll to the bottom and expand **Additional settings**.
+4. Uncheck both options.
+
+> **Tip:** If you don't use BitLocker, also toggle off the **BitLocker Drive Encryption**
+> notification in the same notifications list — it has no purpose on an unencrypted drive.
+
+---
+
+## 7. Windows Optional Features
+
+Windows bundles many optional components (Hyper-V, WSL, legacy frameworks, print/fax
+services) that are enabled by default but rarely used outside specific workflows.
+
+1. Press **Windows Key + R**, type `optionalfeatures`, and press **Enter**.
+2. Uncheck any features you don't need.
+
+> **Caution:** Do not uncheck features you actively rely on — particularly **Windows
+> Subsystem for Linux (WSL)** and **Hyper-V** if you're a developer using either. See
+> `windows-run-commands-guide.md` for the full reference on this command.
+
+---
+
+## 8. Deep Storage Cleanup & Temp File Removal
 
 Windows continuously writes prefetch data, temporary install files, and app crash logs.
 Uninstalled apps often leave their cache folders behind permanently.
@@ -209,7 +286,7 @@ old Windows Update packages and the `Windows.old` folder from previous installs.
 
 ---
 
-## 6. Network Routing Refresh
+## 9. Network Routing Refresh
 
 Stale DNS cache entries cause browser connection errors and lag spikes over time. This
 clears the local DNS resolver without touching network adapter settings.
@@ -228,7 +305,7 @@ reset sequence.
 
 ---
 
-## 7. Monthly Security Baseline
+## 10. Monthly Security Baseline
 
 These two tasks take 10 minutes and prevent the majority of performance degradation from
 accumulating over time.
